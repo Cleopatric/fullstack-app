@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  web:
+    container_name: stage-web
+    env_file: ../../.env
+    restart: always
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+    build:
+      context: ../..
+      dockerfile: ./build/Dockerfile
+    command:
+      - sh
+      - -c
+      - |
+        python3 manage.py collectstatic --no-input --clear
+        python3 manage.py migrate
+        gunicorn configs.wsgi:application --bind 0.0.0.0:8081 --timeout 120 --capture-output --enable-stdio-inheritance --log-level=debug
+    ports:
+      - "8081:8081"
+    volumes:
+      - static_volume:/app/static
+    networks:
+      - outer_network
+      - default
+
+  nginx:
+    build: ./nginx
+    container_name: stage-nginx
+    networks:
+      - outer_network
+      - default
+    volumes:
+      - static_volume:/app/static
+    ports:
+      - "8000:8000"
+    depends_on:
+      - web
+
+  db:
+    image: postgres:13.2
+    container_name: stage-db
+    env_file: ../../.env
+    ports:
+      - "5432:5432"
+    networks:
+      - outer_network
+      - default
+    volumes:
+      - postgres_stage:/var/lib/postgresql/data
+
+  redis:
+    image: redis:6.2.1-alpine
+    restart: always
+    networks:
+      - outer_network
+      - default
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_stage:
+  static_volume:
+networks:
+  default:
+    driver: bridge
+  outer_network:
+    external: true
