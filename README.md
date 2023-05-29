@@ -51,7 +51,7 @@
     python manage.py runserver migrate
     ```
 
-5. Run services
+5. Run server
 
     ```sh
     python manage.py runserver
