@@ -2,6 +2,7 @@
 ![Python](https://img.shields.io/badge/-Python-black?style=flat-square&logo=Python)
 ![Django Rest Framework](https://img.shields.io/badge/DRF-red?style=flat-square&logo=Django)
 ![React](https://img.shields.io/badge/-React-%232c3e50?style=flat-square&logo=react)
+![TypeScript](https://img.shields.io/badge/-TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)
 ![Postgresql](https://img.shields.io/badge/-Postgresql-%232c3e50?style=flat-square&logo=Postgresql)
 ![Redis](https://img.shields.io/badge/-Redis-FCA121?style=flat-square&logo=Redis)
 ![Docker](https://img.shields.io/badge/-Docker-46a2f1?style=flat-square&logo=docker&logoColor=white)
@@ -19,7 +20,7 @@
     ```sh
     ### BASE  #################################
     SECRET_KEY=<YOU-SECRET-KEY>
-    APP_ENVIRONMENT=LOCAL
+    APP_ENVIRONMENT=LOCAL # or STAGE
     SERVER_PORT=8000
     DEBUG=False
    
@@ -54,6 +55,12 @@
 
     ```sh
     python manage.py runserver
+    ```
+
+6. Run tests
+
+    ```sh
+    python manage.py test shipments
     ```
 
 ### Frontend setup

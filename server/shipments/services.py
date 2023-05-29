@@ -15,4 +15,4 @@ class ShipmentsService(CacheMixin):
 
     @cache_wrapper(shipments_cache_key)
     def get_all_shipments(self) -> QuerySet:
-        return Shipment.objects.select_related('direction').all().order_by('id')
+        return Shipment.objects.select_related('direction').all().order_by('-id')

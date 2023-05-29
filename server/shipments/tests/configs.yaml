@@ -1,0 +1,8 @@
+test_city:
+  name: 'City 1'
+
+test_shipment:
+  title: 'TEST-SH-1'
+  date: '2023-06-10'
+  comment: 'Some test comment'
+

@@ -26,7 +26,7 @@ class FullShipmentSerializer(BaseShipmentSerializer):
     class Meta:
         model = Shipment
         fields = ('id', 'title', 'direction_city', 'date',
-                  'direction_city', 'comment',)
+                  'direction', 'comment',)
 
 
 class UpdateShipmentSerializer(serializers.ModelSerializer):
