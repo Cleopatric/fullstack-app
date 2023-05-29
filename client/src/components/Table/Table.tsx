@@ -1,11 +1,11 @@
 import axios from "axios";
 import React from "react";
+import { useState, useEffect } from "react";
 
 import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 
 import styles from "./styles.module.sass";
 import { Button } from "@mui/material";
-import { useAxiosRequest } from "../../hooks/useAxiosRequest";
 
 
 interface ITable {
@@ -14,12 +14,30 @@ interface ITable {
 
 export const Table = (props: ITable) => {
   const { handleOpenModal } = props;
-  const { loading, response, error } = useAxiosRequest('http://127.0.0.1:8000/shipments/all-shipments', {}, true);
 
+  const baseUrl = 'http://127.0.0.1:8000/shipments/all-shipments';
+  const [previousPage, setPreviousPage] = useState("");
+  const [nextPage, setNextPage] = useState("");
+  const [shipments, setShipments] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    getShipments(baseUrl);
+  }, []);
+
+  const getShipments = (url: string)=> {
+    axios.get(`${url}`).then((response) => {
+        setPreviousPage(response.data.previous)
+        setNextPage(response.data.next)
+        setShipments(response.data.results)
+    });
+  }
 
   const handleButtonClick = (instanceId?: string) => {
     handleOpenModal("edit", instanceId)
   }
+
 
   const columns: GridColDef[] = [
     { field: "title", headerName: "title", flex: 2 },
@@ -38,12 +56,18 @@ export const Table = (props: ITable) => {
 
   return (
     <div className={styles.wrapper}>
-      {loading || !response?.length ?  <div>loading...</div> : <DataGrid
-        rows={response}
+      {loading || !shipments?.length ?  <div>loading...</div> : <DataGrid
+        rows={shipments}
         columns={columns}
         className={styles.table}
         rowSelection={false}
+        hideFooter={true}
       />}
+
+    <div className={styles.pagination}>
+      {previousPage ? <Button onClick={() => getShipments(previousPage)}> ← PREV</Button> : null}
+      {nextPage ? <Button onClick={() => getShipments(nextPage)}>NEXT → </Button> : null}
+    </div>
 
     </div>
   );
