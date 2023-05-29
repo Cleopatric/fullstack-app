@@ -1,4 +1,4 @@
-# Shipment App
+# Shipments App
 ![Python](https://img.shields.io/badge/-Python-black?style=flat-square&logo=Python)
 ![Django Rest Framework](https://img.shields.io/badge/DRF-red?style=flat-square&logo=Django)
 ![React](https://img.shields.io/badge/-React-%232c3e50?style=flat-square&logo=react)
