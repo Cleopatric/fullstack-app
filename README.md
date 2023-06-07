@@ -27,7 +27,8 @@
     make admin
     ```
 
-4. Finally, open [Admin Panel](http://0.0.0.0:8000) and create some instances for cities
+4. Finally, open [Admin Panel](http://0.0.0.0:8000/admin) and create some instances for cities
+5. all endpoints you can see in [Swagger](http://0.0.0.0:8000)
 
 ### Frontend setup
 1. Install requirements:
