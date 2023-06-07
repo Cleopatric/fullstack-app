@@ -20,16 +20,16 @@
     ```sh
     ### BASE  #################################
     SECRET_KEY=<YOU-SECRET-KEY>
-    APP_ENVIRONMENT=LOCAL # or STAGE
+    APP_ENVIRONMENT=LOCAL
     SERVER_PORT=8000
-    DEBUG=False
+    DEBUG=True
    
     ### POSTGRES  #############################
-    POSTGRES_HOST=127.0.0.1
+    POSTGRES_PASSWORD=admin
+    POSTGRES_USER=admin
+    POSTGRES_DB=shipments
     POSTGRES_PORT=5432
-    POSTGRES_USER=<YOU-USER>
-    POSTGRES_PASSWORD=<YOU-PASSWORD>
-    POSTGRES_DB=<YOU-DB>
+    POSTGRES_HOST=127.0.0.1
    
     #### REDIS ##############################
     REDIS_HOST=127.0.0.1
@@ -48,7 +48,7 @@
 
     ```sh
     cd server/
-    python manage.py runserver migrate
+    python manage.py migrate
     ```
 
 5. Run server
