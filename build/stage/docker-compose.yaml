@@ -66,4 +66,4 @@ networks:
   default:
     driver: bridge
   outer_network:
-    external: true
+    driver: bridge

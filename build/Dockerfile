@@ -9,4 +9,4 @@ RUN pip install -r requirements.txt
 
 COPY ./server /app
 WORKDIR /app
-
+RUN mkdir -p static

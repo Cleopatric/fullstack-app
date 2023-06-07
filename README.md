@@ -9,59 +9,25 @@
 
 ### Backend setup
 
-1. Install requirements:
+1. Run build:
 
     ```sh
-     pip install -r requirements.txt
+   make build -B
     ```
- 
-2. Set .env 
-
-    ```sh
-    ### BASE  #################################
-    SECRET_KEY=<YOU-SECRET-KEY>
-    APP_ENVIRONMENT=LOCAL # or STAGE
-    SERVER_PORT=8000
-    DEBUG=False
-   
-    ### POSTGRES  #############################
-    POSTGRES_HOST=127.0.0.1
-    POSTGRES_PORT=5432
-    POSTGRES_USER=<YOU-USER>
-    POSTGRES_PASSWORD=<YOU-PASSWORD>
-    POSTGRES_DB=<YOU-DB>
-   
-    #### REDIS ##############################
-    REDIS_HOST=127.0.0.1
-    REDIS_PORT=6379
-    REDIS_DATABASE=1
-    REDIS_LOCATION=redis://127.0.0.1:6379/1
-    ```
-
-3. Run postgres and redis:
+  
+2. After completed, stop the process and run command:
 
     ```sh
     make start
     ```
 
-4. Run django migrations
+3. Create a superuser:
 
     ```sh
-    cd server/
-    python manage.py runserver migrate
+    make admin
     ```
 
-5. Run server
-
-    ```sh
-    python manage.py runserver
-    ```
-
-6. Run tests
-
-    ```sh
-    python manage.py test shipments
-    ```
+4. Finally, open [Admin Panel](http://0.0.0.0:8000) and create some instances for cities
 
 ### Frontend setup
 1. Install requirements:
